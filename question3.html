@@ -43,7 +43,7 @@
   <form>
     <input type="text" id="email" class="form-control" placeholder="Enter HKU email">
   
-    <button type="submit" id="submitBtn" disabled>Submit</button>  
+    <button type="button" id="submitBtn" disabled>Submit</button>  
   </form>
   
   <div id="uid"></div>
@@ -58,12 +58,12 @@
       const regex = /^[^@]+@(connect.hku.hk|hku.hk)$/;
       
       if (regex.test(email)) {
-        emailInput.classList.remove('invalid');
         emailInput.classList.add('valid');
+        emailInput.classList.remove('invalid');
         submitBtn.disabled = false;
       } else {
-        emailInput.classList.remove('valid');
         emailInput.classList.add('invalid');
+        emailInput.classList.remove('valid');
         submitBtn.disabled = true;
       }
     }
