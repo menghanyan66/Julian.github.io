@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Email Input Demo</title>
+  
+  <style>
+    .form-control {
+      padding: 12px 20px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      border: 2px solid #ccc;
+      border-radius: 4px;
+    }
+    
+    .invalid {
+      border-color: red;
+    }
+    
+    .valid {
+      border-color: green;  
+    }
+    
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      opacity: 0.9;
+    }
+    
+    button:disabled {
+      opacity: 0.5; 
+      cursor: not-allowed;
+    }
+  </style>  
+</head>
+
+<body>
+
+  <form>
+    <input type="text" id="email" class="form-control" placeholder="Enter HKU email">
+  
+    <button type="submit" id="submitBtn" disabled>Submit</button>  
+  </form>
+  
+  <div id="uid"></div>
+
+  <script>
+    const emailInput = document.getElementById('email');
+    const submitBtn = document.getElementById('submitBtn');
+    const uidDisplay = document.getElementById('uid');
+
+    function validateEmail() {
+      const email = emailInput.value;
+      const regex = /^[^@]+@(connect.hku.hk|hku.hk)$/;
+      
+      if (regex.test(email)) {
+        emailInput.classList.remove('invalid');
+        emailInput.classList.add('valid');
+        submitBtn.disabled = false;
+      } else {
+        emailInput.classList.remove('valid');
+        emailInput.classList.add('invalid');
+        submitBtn.disabled = true;
+      }
+    }
+
+    emailInput.addEventListener('keyup', validateEmail);
+
+    function getUID(email) {
+      return email.split('@')[0]; 
+    }
+
+    function displayUID() {
+      const email = emailInput.value;
+      const uid = getUID(email);
+      uidDisplay.textContent = uid; 
+    }
+
+    submitBtn.addEventListener('click', displayUID); 
+  </script>
+
+</body>
+</html>
